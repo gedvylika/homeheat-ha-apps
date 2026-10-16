@@ -9,7 +9,8 @@ boot: auto
 init: false
 homeassistant_api: true
 map:
-  - share:rw
+  - type: share
+    read_only: false
 options:
   db_path: /share/homeheat/homeheat.sqlite
   house_config_path: /share/homeheat/house_config.yaml
@@ -129,6 +130,8 @@ schema:
   proposal_reconcile: bool
   pellet_forecast_days: int(7,60)
   pellet_lookback_days: int(2,60)
+  pellet_daily_median_days: int(2,30)
+  pellet_daily_min_coverage_hours: float(1,24)
   fuel_total_entity: str
   fuel_stats_entity: str
   review_lead_hours: float(1,48)
