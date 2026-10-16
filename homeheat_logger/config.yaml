@@ -1,0 +1,87 @@
+name: HomeHeat Logger
+version: "0.2.1"
+slug: homeheat_logger
+description: Automatic long-term logger for Home Assistant entities and selected MQTT raw topics.
+arch:
+  - aarch64
+startup: application
+boot: auto
+init: false
+homeassistant_api: true
+services:
+  - mqtt:want
+map:
+  - type: share
+    read_only: false
+options:
+  database_path: "/share/homeheat/homeheat.sqlite"
+  snapshot_seconds: 900
+  include_domains:
+    - sensor
+    - binary_sensor
+    - climate
+    - number
+    - switch
+    - weather
+    - input_number
+    - input_boolean
+  exclude_entities: []
+  mqtt_capture: true
+  mqtt_topics:
+    - "homeheat/#"
+    - "zigbee2mqtt/#"
+  mqtt_max_payload_bytes: 262144
+  forecast_capture: true
+  forecast_interval_seconds: 1800
+  forecast_types:
+    - hourly
+  weather_entities: []
+  external_forecast_capture: true
+  external_forecast_interval_seconds: 10800
+  external_forecast_days: 8
+  external_forecast_timeout_seconds: 45
+  meteo_lt_enabled: true
+  meteo_lt_place_code: ""
+  open_meteo_ecmwf_enabled: true
+  open_meteo_ecmwf_model: ecmwf_ifs
+  open_meteo_ensemble_enabled: true
+  open_meteo_ensemble_model: ecmwf_ifs025_ensemble_mean
+  export_enabled: true
+  export_interval_seconds: 21600
+  export_days: 30
+  export_dir: "/share/homeheat/export"
+  export_timezone: "Europe/Vilnius"
+  daily_archive: true
+schema:
+  database_path: str
+  snapshot_seconds: "int(60,86400)"
+  include_domains:
+    - str
+  exclude_entities:
+    - str
+  mqtt_capture: bool
+  mqtt_topics:
+    - str
+  mqtt_max_payload_bytes: "int(1024,1048576)"
+  forecast_capture: bool
+  forecast_interval_seconds: "int(300,21600)"
+  forecast_types:
+    - str
+  weather_entities:
+    - str
+  external_forecast_capture: bool
+  external_forecast_interval_seconds: "int(1800,86400)"
+  external_forecast_days: "int(3,16)"
+  external_forecast_timeout_seconds: "int(10,120)"
+  meteo_lt_enabled: bool
+  meteo_lt_place_code: str
+  open_meteo_ecmwf_enabled: bool
+  open_meteo_ecmwf_model: str
+  open_meteo_ensemble_enabled: bool
+  open_meteo_ensemble_model: str
+  export_enabled: bool
+  export_interval_seconds: "int(900,86400)"
+  export_days: "int(1,3650)"
+  export_dir: str
+  export_timezone: str
+  daily_archive: bool
