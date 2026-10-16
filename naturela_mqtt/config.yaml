@@ -1,0 +1,39 @@
+name: Naturela MQTT Bridge
+version: "0.1.4"
+slug: naturela_mqtt
+description: Publish Naturela burner telemetry to MQTT with Home Assistant discovery.
+arch:
+  - aarch64
+startup: services
+boot: auto
+init: false
+options:
+  naturela_url: "https://iot.naturela-bg.com"
+  device_id: "11495"
+  email: ""
+  password: ""
+  poll_seconds: 30
+  stats_poll_seconds: 1800
+  timezone: "Europe/Vilnius"
+  mqtt_host: "core-mosquitto"
+  mqtt_port: 1883
+  mqtt_username: ""
+  mqtt_password: ""
+  mqtt_base_topic: "homeheat/naturela"
+  retry_initial_seconds: 10
+  retry_max_seconds: 60
+schema:
+  naturela_url: str
+  device_id: str
+  email: str
+  password: password
+  poll_seconds: "int(10,300)"
+  stats_poll_seconds: "int(60,21600)"
+  timezone: str
+  mqtt_host: str
+  mqtt_port: port
+  mqtt_username: str
+  mqtt_password: password
+  mqtt_base_topic: str
+  retry_initial_seconds: int(1,300)
+  retry_max_seconds: int(5,600)
